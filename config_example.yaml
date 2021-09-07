@@ -1,0 +1,12 @@
+core:
+  mongodb_db: "users"
+  mongodb_url: "mongodb://user:password@yourip:27017/"
+jwt:
+  algorithm: "HS256"
+  expire: 30
+  secret: "SECRET"
+email:
+  smtp: "mail.example.com"
+  port: 465
+  username: "system@example.com"
+  password: "password123"

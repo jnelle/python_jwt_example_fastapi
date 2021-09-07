@@ -1,0 +1,26 @@
+version: '3.3'
+networks:
+  web:
+   external: true
+services:
+    backend:
+        image: service1-backend:latest
+        container_name: service1-backend
+        volumes:
+          - ./:/home/jimbo
+        extra_hosts:
+          - "host.docker.internal:172.17.0.1" # for MongoDB on Host, change it in /etc/mongo/mongod.conf too
+        networks:
+          - web
+        labels:
+          - traefik.enable=true
+          - traefik.backend=service1-backend
+          - traefik.docker.network=web
+          - traefik.http.middlewares.backend-compress.compress=true
+          - traefik.http.routers.backend.middlewares=landing-compress,stripheader
+          - traefik.http.services.service1-backend.loadbalancer.server.port=3000
+          - "traefik.http.routers.service1-backend-secure.rule=Host(`YOURDOMAIN`)"
+          - "traefik.http.routers.service1-backend-secure.tls=true"
+          - "traefik.http.routers.service1-backend-secure.tls.certresolver=lets-encrypt"
+          - "traefik.http.routers.service1-backend-secure.service=service1-backend"
+          - traefik.port=3000

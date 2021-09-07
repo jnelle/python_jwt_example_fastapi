@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "Service1-backend"
+version = "0.1.0"
+description = "Service1 Backend"
+authors = ["Billaids <jimmy.nelle@hsw-stud.de>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.68.1"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+uvicorn = "^0.15.0"
+loguru = "^0.5.3"
+motor = "^2.5.1"
+PyYAML = "^5.4.1"
+dnspython = "^2.1.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
