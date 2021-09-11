@@ -26,7 +26,7 @@ class AddUserModel(BaseModel):
 
 class AddUserRequest(BaseModel):
     user: AddUserModel
-
+    token: str
 
 class TokenModel(BaseModel):
     access_token: str

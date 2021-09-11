@@ -34,16 +34,13 @@ def create_access_token(data: dict, jwt_expire: int, jwt_secret: str, jwt_algori
     to_encode = data.copy()
     expire = datetime.utcnow() + timedelta(minutes=jwt_expire)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, jwt_secret, algorithm=jwt_algorithm)
-    return encoded_jwt
+    return jwt.encode(to_encode, jwt_secret, algorithm=jwt_algorithm)
 
 
 def verify_access_token(access_token: str, jwt_secret: str, jwt_algorithm: str) -> dict:
     try:
-        decoded_token = jwt.decode(
+        return jwt.decode(
             access_token, jwt_secret, algorithms=[jwt_algorithm])
-        logger.debug(decoded_token)
-        return decoded_token
     except JWTError as e:
         raise JWTError(f"Invalid token: {e}")
 
@@ -59,9 +56,3 @@ async def refresh_session(jwt_expire: int, jwt_secret: str, jwt_algorithm: str, 
             jwt_secret=jwt_secret,
             jwt_algorithm=jwt_algorithm
         )
-    return create_access_token(
-        data={"token": decoded_token["token"]},
-        jwt_expire=jwt_expire,
-        jwt_secret=jwt_secret,
-        jwt_algorithm=jwt_algorithm
-    )

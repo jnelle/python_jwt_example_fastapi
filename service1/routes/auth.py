@@ -71,4 +71,6 @@ async def add_user(request: AddUserRequest, response: Response) -> APIResponse:
             response.status_code = status.HTTP_200_OK
             access_token = await refresh_session(
                 decoded_token=decoded_jwt, jwt_secret=jwt_secret, jwt_algorithm=jwt_algorithm, jwt_expire=jwt_expire, user_service=user_service)
+            if not access_token:
+                access_token = request.token
             return TokenModel(access_token=access_token, token_type="bearer", message="SUCCESS")
