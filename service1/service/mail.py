@@ -20,6 +20,7 @@ class SendMail:
         msg["To"] = receiver_email
         msg["Subject"] = subject
         # TODO: Add template
+        # templates_env = Environment(loader=FileSystemLoader(searchpath="service1/templates"))
         # template = templates_env.get_template('email.html')
         # html = template.render(button_href=button_href, button_text=button_text,
         #                        sent_message=sent_message, user_name=user_name)
