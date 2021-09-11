@@ -8,8 +8,8 @@ services:
         container_name: service1-backend
         volumes:
           - ./:/home/jimbo
-        extra_hosts:
-          - "host.docker.internal:172.17.0.1" # for MongoDB on Host, change it in /etc/mongo/mongod.conf too
+        # extra_hosts:
+        #   - "host.docker.internal:172.17.0.1" # for non-docker MongoDB, change ip in /etc/mongo/mongod.conf too
         networks:
           - web
         labels:
